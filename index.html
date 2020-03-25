@@ -1,11 +1,12 @@
 <html>
 <header>
   <title>Shadowsych's Hit List Sorter</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
 </header>
 <body>
-  <h1>Hit List Sorter - By
+  <h2>Hit List Sorter Programmed by
     <a href="https://github.com/Shadowsych" target="_blank">Shadowsych</a>
-  </h1>
+  </h2>
   <p>
     This program assumes that the end of hit line will contain the number of
     points, so it will sort in descending order by that number.<br />
@@ -23,14 +24,15 @@
     test1@gmail.com:12345 | Points = 50<br />
   </p>
 
-  <textarea id="textbox-unsorted" placeholder="Place your hits list here."
-    rows="12" cols="150"></textarea>
+  <textarea id="textbox-unsorted"
+    placeholder="Paste your hit list here, then press 'Sort Hit List'."
+    rows="12" cols="100"></textarea>
   <br />
-  <button onClick="sortComboList()">Sort Hits List</button>
+  <button class="sort-btn" onClick="sortComboList()">Sort Hit List</button>
   <br />
   <br />
-  <textarea id="textbox-sorted" placeholder="Sorted hits list will be here."
-    rows="12" cols="150"></textarea>
+  <textarea id="textbox-sorted" placeholder="Sorted hit list will be here."
+    rows="12" cols="100"></textarea>
   <br />
 
   <script src="index.js">

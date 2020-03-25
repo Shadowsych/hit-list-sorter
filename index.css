@@ -1,0 +1,10 @@
+.sort-btn {
+  padding: 7.5px;
+  margin-top: 5px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 2.5px;
+}

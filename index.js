@@ -1,40 +1,48 @@
 // sort the list of combos inside of the unsorted textbox
 function sortComboList() {
   var unsortedText = document.getElementById("textbox-unsorted").value;
-  var sortedHits = [];
+  if(unsortedText) {
+    var sortedHits = [];
 
-  // store the last token of each line, assuming it's the number of points
-  var lines = unsortedText.split("\n");
-  for(var lineIndex = 0; lineIndex < lines.length; lineIndex++) {
-    // parse the points as a number
-    var points = getPoints(lines[lineIndex]);
+    // store the last token of each line, assuming it's the number of points
+    var lines = unsortedText.split("\n");
+    for(var lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+      // parse the points as a number
+      var points = getPoints(lines[lineIndex]);
 
-    // if it's a number, then add the hit into hits Array
-    if(!Number.isNaN(points)) {
-      sortedHits.push({lineIndex, points});
+      // if it's a number, then add the hit into hits Array
+      if(!Number.isNaN(points)) {
+        sortedHits.push({lineIndex, points});
+      }
     }
-  }
 
-  // sort the hits list using a custom function to sort it based on points
-  sortedHits.sort(function(hit1, hit2) {
-    if(hit1.points > hit2.points) {
-      return -1;
+    if(sortedHits.length > 0) {
+      // sort the hits list using a custom function to sort it based on points
+      sortedHits.sort(function(hit1, hit2) {
+        if(hit1.points > hit2.points) {
+          return -1;
+        }
+        return 1;
+      });
+
+      // build the sorted hits
+      var sortedTextBuilder = "";
+      for(var hitIndex = 0; hitIndex < sortedHits.length; hitIndex++) {
+        var hit = sortedHits[hitIndex];
+
+        // add this hit's line into the sorted text builder
+        sortedTextBuilder += lines[hit.lineIndex] + "\n";
+      }
+
+      // output the sorted hits
+      var sortedText = document.getElementById("textbox-sorted");
+      sortedText.value = sortedTextBuilder;
+    } else {
+      alert("The inputted hit list is an invalid format!")
     }
-    return 1;
-  });
-
-  // build the sorted hits
-  var sortedTextBuilder = "";
-  for(var hitIndex = 0; hitIndex < sortedHits.length; hitIndex++) {
-    var hit = sortedHits[hitIndex];
-
-    // add this hit's line into the sorted text builder
-    sortedTextBuilder += lines[hit.lineIndex] + "\n";
+  } else {
+    alert("The hit list is empty!");
   }
-
-  // output the sorted hits
-  var sortedText = document.getElementById("textbox-sorted");
-  sortedText.value = sortedTextBuilder;
 }
 
 /*
