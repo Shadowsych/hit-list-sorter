@@ -1,4 +1,4 @@
-# Hit List Sorter
+# Simple Hit List Sorter
 https://shadowsych.github.io/simple-hit-list-sorter/
 
 This program assumes that the end of hit line will contain the number of points, so it will sort in descending order by that number.
