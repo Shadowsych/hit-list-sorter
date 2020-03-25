@@ -1,0 +1,74 @@
+<html>
+<header>
+  <title>Shadowsych's Hit List Sorter</title>
+</header>
+<body>
+  <h1>Hit List Sorter - By
+    <a href="https://github.com/Shadowsych" target="_blank">Shadowsych</a>
+  </h1>
+  <p>
+    This program assumes that the end of hit line will contain the number of
+    points, so it will sort in descending order by that number.<br />
+
+    <br />
+    For example, placing this inside of the first textbox:<br />
+    test1@gmail.com:12345 | Points = 50<br />
+    test2@gmail.com:12345 | Points = 125<br />
+    test3@gmail.com:12345 | Points = 75<br />
+
+    <br />
+    Will produce this output:<br />
+    test2@gmail.com:12345 | Points = 125<br />
+    test3@gmail.com:12345 | Points = 75<br />
+    test1@gmail.com:12345 | Points = 50<br />
+  </p>
+
+  <textarea id="textbox-unsorted" placeholder="Place your hits list here."
+    rows="12" cols="150"></textarea>
+  <br />
+  <button onClick="sortComboList()">Sort Hits List</button>
+  <br />
+  <br />
+  <textarea id="textbox-sorted" placeholder="Sorted hits list will be here."
+    rows="12" cols="150"></textarea>
+  <br />
+
+  <script>
+    // sort the list of combos inside of the unsorted textbox
+    function sortComboList() {
+      var unsortedText = document.getElementById("textbox-unsorted").value;
+      var sortedHits = [];
+
+      // store the last token of each line, assuming it's the number of points
+      var lines = unsortedText.split("\n");
+      for(var lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+        // extract the points (last token), then parse it as a number
+        var points = lines[lineIndex].split(" ").pop();
+        points = parseFloat(points.replace(/\D/g,''));
+
+        // if it's a number, then add the hit into hits Array
+        if(!Number.isNaN(points)) {
+          sortedHits.push({lineIndex, points});
+        }
+      }
+
+      // sort the hits list using a custom function to sort it based on points
+      sortedHits.sort(function(hit1, hit2) {
+        if(hit1.points > hit2.points) {
+          return -1;
+        }
+        return 1;
+      });
+
+      // output the sorted hits
+      for(var hitIndex = 0; hitIndex < sortedHits.length; hitIndex++) {
+        var hit = sortedHits[hitIndex];
+
+        // add this hit's line into the sorted textbox
+        var sortedText = document.getElementById("textbox-sorted");
+        sortedText.value += lines[hit.lineIndex] + "\n";
+      }
+    }
+  </script>
+</body>
+</html>
