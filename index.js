@@ -25,11 +25,12 @@ function sortComboList() {
   });
 
   // output the sorted hits
+  var sortedText = document.getElementById("textbox-sorted");
+  sortedText.value = "";
   for(var hitIndex = 0; hitIndex < sortedHits.length; hitIndex++) {
     var hit = sortedHits[hitIndex];
 
     // add this hit's line into the sorted textbox
-    var sortedText = document.getElementById("textbox-sorted");
     sortedText.value += lines[hit.lineIndex] + "\n";
   }
 }
